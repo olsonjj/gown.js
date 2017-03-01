@@ -1,4 +1,5 @@
 /**
+ * XXX: replace with MouseWheelManager (see InteractionManager / KeyboardManager)
  * TODO: make it work with PIXI (this is just copied from createjs_ui / WIP)
  * (e.g. get currently selected object using this.stage.interactionManager.hitTest(this, e)
  * and then execute an "onwheel"-callback)
@@ -42,7 +43,7 @@ function mouseWheelSupport(stage, enable) {
                 GOWN._mouseWheelHandler, false);
             canvas.addEventListener('DOMMouseScroll',
                 GOWN._mouseWheelHandler, false);
-        } else {
+        } else if (canvas.attachEvent) {
             canvas.attachEvent('onmousewheel',
                 GOWN._mouseWheelHandler);
         }
@@ -55,7 +56,7 @@ function mouseWheelSupport(stage, enable) {
                 GOWN._mouseWheelHandler);
             canvas.removeEventListener('DOMMouseScroll',
                 GOWN._mouseWheelHandler);
-        } else {
+        } else if (canvas.detachEvent) {
             canvas.detachEvent('onmousewheel',
                 GOWN._mouseWheelHandler);
         }

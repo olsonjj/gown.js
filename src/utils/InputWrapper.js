@@ -8,8 +8,7 @@
  * @memberof GOWN
  * @static
  */
-function InputWrapper()
-{
+function InputWrapper() {
 }
 module.exports = InputWrapper;
 
@@ -27,8 +26,7 @@ InputWrapper.hiddenInput = null;
  * create/return unique input field.
  * @returns {DOMObject}
  */
-InputWrapper.createInput = function()
-{
+InputWrapper.createInput = function() {
     if (!InputWrapper.hiddenInput) {
         var input = document.createElement('input');
         input.type = 'text';
@@ -43,36 +41,17 @@ InputWrapper.createInput = function()
         input.style.zIndex = 10;
 
         // add blur handler
-        input.addEventListener('blur', function()
-        {
-            if (GOWN.InputControl.currentInput)
-            {
+        input.addEventListener('blur', function() {
+            if (GOWN.InputControl.currentInput) {
                 GOWN.InputControl.currentInput.onMouseUpOutside();
             }
         }, false);
 
-        // on key down
-        input.addEventListener('keydown', function(e)
-        {
-            if (GOWN.InputControl.currentInput)
-            {
-                e = e || window.event;
-                if (GOWN.InputControl.currentInput.hasFocus)
-                {
-                    GOWN.InputControl.currentInput.onKeyDown(e);
-                }
-            }
-        });
-
         // on key up
-        input.addEventListener('keyup', function(e)
-        {
-            if(GOWN.InputControl.currentInput)
-            {
-                e = e || window.event;
-                if (GOWN.InputControl.currentInput.hasFocus)
-                {
-                    GOWN.InputControl.currentInput.onKeyUp(e);
+        input.addEventListener('keyup', function() {
+            if (GOWN.InputControl.currentInput) {
+                if (GOWN.InputControl.currentInput.hasFocus) {
+                    GOWN.InputControl.currentInput.onInputChanged();
                 }
             }
         });
@@ -95,8 +74,7 @@ InputWrapper.textProp = 'value';
 /**
  * activate the text input
  */
-InputWrapper.focus = function()
-{
+InputWrapper.focus = function() {
     if (InputWrapper.hiddenInput) {
         InputWrapper.hiddenInput.focus();
     }
@@ -105,8 +83,7 @@ InputWrapper.focus = function()
 /**
  * deactivate the text input
  */
-InputWrapper.blur = function()
-{
+InputWrapper.blur = function() {
     if (InputWrapper.hiddenInput) {
         InputWrapper.hiddenInput.blur();
     }
@@ -117,11 +94,15 @@ InputWrapper.blur = function()
  * set selection
  * @returns {DOMObject}
  */
-InputWrapper.setSelection = function(start, end)
-{
+InputWrapper.setSelection = function(start, end) {
     if (InputWrapper.hiddenInput) {
-        InputWrapper.hiddenInput.selectionStart = start;
-        InputWrapper.hiddenInput.selectionEnd = end;
+        if(start < end) {
+            InputWrapper.hiddenInput.selectionStart = start;
+            InputWrapper.hiddenInput.selectionEnd = end;
+        } else {
+            InputWrapper.hiddenInput.selectionStart = end;
+            InputWrapper.hiddenInput.selectionEnd = start;
+        }
     } else {
         InputWrapper._selection = [start, end];
     }
@@ -143,6 +124,28 @@ InputWrapper.getSelection = function() {
 };
 
 /**
+ * set cursor position of the hidden input
+ */
+InputWrapper.setCursorPos = function (pos) {
+    if (InputWrapper.hiddenInput) {
+        var elem = InputWrapper.hiddenInput;
+        if(elem.createTextRange) {
+            var range = elem.createTextRange();
+            range.move('character', pos);
+            range.select();
+        }
+        else {
+            if(elem.selectionStart) {
+                elem.focus();
+                elem.setSelectionRange(pos, pos);
+            }
+            else
+                elem.focus();
+        }
+    }
+};
+
+/**
  * get text value from hiddenInput
  * @returns {String}
  */
@@ -158,7 +161,7 @@ InputWrapper.getText = function() {
 };
 
 /**
- * get text value to hiddenInput
+ * set text value to hiddenInput
  * @param {String} text
  */
 InputWrapper.setText = function(text) {
@@ -186,6 +189,10 @@ InputWrapper.setMaxLength = function(length) {
     }
 };
 
+/**
+ * set the input type of the hidden input
+ * @param length
+ */
 InputWrapper.setType = function(type) {
     if (InputWrapper.hiddenInput) {
         InputWrapper.hiddenInput.type = type;
@@ -194,6 +201,10 @@ InputWrapper.setType = function(type) {
     }
 };
 
+/**
+ * get the input type of the hidden input
+ * @returns {String}
+ */
 InputWrapper.getType = function() {
     if (InputWrapper.hiddenInput) {
         return InputWrapper.hiddenInput.type;

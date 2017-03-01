@@ -1,3 +1,15 @@
+TODO next
+=========
+ - update themes and test all components with current theming (add scalemode for theming)
+
+ - POM integration: provide registerPOMElements-function (see https://github.com/GreyRook/POM/issues/10 )
+
+ - mouse wheel support
+
+ - theme for TextInput
+ 
+ - other themes from feathers (metalworks-mobile, topcoat-light, minimal, ...)
+
 TODO
 ======
 This list is not ordered by priority nor does it contain any promise that those items will be implemented.
@@ -12,21 +24,15 @@ This list is not ordered by priority nor does it contain any promise that those 
 
    - test Scrollable, Slider and SliderData
 
-   - test ScrollBar, ScrollThumb and ScrollArea
+   - test ScrollBar, ScrollThumb, List and ScrollContainer
 
    - test InputControl and InputWrapper
-
-   - more tests for Shapes
 
    - ignore renderAreaWebGL and renderWebGL in blanket tests
 
  - How-To tutorial and beginners documentation!
 
- - examples-side (like [the one from pixi.js](http://pixijs.github.io/examples/) )
-
- - real viewport(s) for ScrollArea ?
-
- - build/compress themes
+ - more examples for the examples-side (see [gown-examples](https://brean.github.io/gown-examples/) )
 
  - benchmarking capabilities and performance optimisation
 
@@ -37,8 +43,6 @@ This list is not ordered by priority nor does it contain any promise that those 
  - more controls (and examples) for:
 
    - Label (not needed - just use PIXI.Text?)
-
-   - Checkbox
 
    - RadioBox
 
@@ -56,9 +60,9 @@ This list is not ordered by priority nor does it contain any promise that those 
 
    - Table
 
-   - Gauge
+   - Gauge (extension?)
 
-   - charts
+   - charts (extension?)
 
      - line chart
 
@@ -70,11 +74,31 @@ This list is not ordered by priority nor does it contain any promise that those 
 
    - ProgressBar
 
-   - ScaleTool (to change width/height of a control)
+   - ScaleTool (to change width/height of a control - extension?)
 
    - ScrollContainer (sth. with the same API as feathers)
 
- - cleanup-functions to free memory/remove event listener etc. (take a look at/extend pixi destroy funtion)
+   - Separator/Movable Divider
+
+   - View navigation (extension?)
+
+     - Tabs
+
+     - Pills
+
+     - Breadcrumbs
+
+     - Pagination
+
+   - Responsive Components
+
+     - Burger Menu & Menu Bar
+
+     - Grid System ( Like [Bootstrap Grid CSS](http://getbootstrap.com/css/#grid) )
+
+ - button icon
+
+ - cleanup-functions to free memory/remove event listener etc. (extend pixi destroy funtion)
 
  - more examples:
 
@@ -83,16 +107,6 @@ This list is not ordered by priority nor does it contain any promise that those 
    - component explorer ([like Feathers UI](http://feathersui.com/examples/components-explorer/))
 
    - scrolling
-
- - more shapes:
-
-   - Line
-
-   - Arc (e.g. for gauge)
-
-   - PolyStar/Hex/Pentagon
-
-   - Polyggon
 
  - Screen & Window management
 
@@ -115,7 +129,5 @@ This list is not ordered by priority nor does it contain any promise that those 
  - Gestue helper (pitch-zoom)
 
  - evaluate cocoonjs support
-
- - generate UI from JSON or XML file
 
  - UI Designer
